@@ -139,11 +139,13 @@ const handleOnLoadStart = (a1, config) => {
         1005, 1007, 1008, 1011, 1012, 1027, 1035, 1037, 1053, 1074, 1145, 1178,
         1256, 1260, 1302, 1308,
     ];
-    if (!sceneNumberArray.includes(miniappScenePtr.readInt())) {
+    const observedScene = miniappScenePtr.readInt();
+    send(`[hook] scene observed: ${observedScene}`);
+    if (!sceneNumberArray.includes(observedScene)) {
         return;
     }
 
-    send(`[hook] scene: ${miniappScenePtr.readInt()}`);
+    send(`[hook] scene: ${observedScene}`);
     send("[hook] hook scene condition -> 1101");
     miniappScenePtr.writeInt(1101);
 
